@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity(name = "tb_users")
-public class UserModel {
+public class UsuarioModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -45,9 +45,9 @@ public class UserModel {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    public UserModel() {}
+    public UsuarioModel() {}
 
-    public UserModel(String nome, String email, String senha, String endereco, String telefone, String cpf, String data_nasci) {
+    public UsuarioModel(String nome, String email, String senha, String endereco, String telefone, String cpf, String data_nasci) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;

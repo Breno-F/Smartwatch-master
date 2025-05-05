@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.AulaTeste.errors.UsuarioJaExiste;
-import com.example.AulaTeste.model.UserModel;
+import com.example.AulaTeste.model.UsuarioModel;
 import com.example.AulaTeste.service.UsuarioService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +26,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/criar_usuario")
-    public ResponseEntity<?> criarUsuario(@RequestBody UserModel userModel) {
+    public ResponseEntity<?> criarUsuario(@RequestBody UsuarioModel userModel) {
         try {
             var user = usuarioService.criarUsuario(userModel);
             return ResponseEntity.status(HttpStatus.CREATED).body(user);
@@ -36,7 +36,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/todos_usuarios")
-    public ResponseEntity<List<UserModel>> getAllUsers() {
+    public ResponseEntity<List<UsuarioModel>> getAllUsers() {
         var users = usuarioService.listarUsuarios();
         if (users.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -45,7 +45,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscar_usuario")
-    public ResponseEntity<UserModel> getUser(@RequestParam String email) {
+    public ResponseEntity<UsuarioModel> getUser(@RequestParam String email) {
         var user = usuarioService.buscarPorEmail(email);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -54,7 +54,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login_usuario")
-    public ResponseEntity<?> login(@RequestBody UserModel userModel) {
+    public ResponseEntity<?> login(@RequestBody UsuarioModel userModel) {
         boolean autenticado = usuarioService.autenticar(userModel.getEmail(), userModel.getSenha());
         if (autenticado) {
             return ResponseEntity.ok("Autenticação bem-sucedida");

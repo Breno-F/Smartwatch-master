@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.AulaTeste.errors.UsuarioJaExiste;
-import com.example.AulaTeste.model.UserModel;
-import com.example.AulaTeste.repository.IUserRepository;
+import com.example.AulaTeste.model.UsuarioModel;
+import com.example.AulaTeste.repository.IUsuarioRepository;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import jakarta.transaction.Transactional;
 @Service
 public class UsuarioService {
     @Autowired
-    private IUserRepository usuarioRepository;
+    private IUsuarioRepository usuarioRepository;
 
-    public UserModel criarUsuario(UserModel userModel) {
+    public UsuarioModel criarUsuario(UsuarioModel userModel) {
         var userExistente = usuarioRepository.findByEmail(userModel.getEmail());
         if (userExistente != null) {
             throw new UsuarioJaExiste();
@@ -28,16 +28,16 @@ public class UsuarioService {
         return usuarioRepository.save(userModel);
     }
 
-    public List<UserModel> listarUsuarios() {
+    public List<UsuarioModel> listarUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    public UserModel buscarPorEmail(String email) {
+    public UsuarioModel buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
 
     public boolean autenticar(String email, String senha) {
-        UserModel usuario = usuarioRepository.findByEmail(email);
+        UsuarioModel usuario = usuarioRepository.findByEmail(email);
         if (usuario == null) return false;
 
         return BCrypt.verifyer().verify(senha.toCharArray(), usuario.getSenha()).verified;
