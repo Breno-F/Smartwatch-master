@@ -3,7 +3,7 @@ package com.example.AulaTeste.errors;
 public class UsuarioJaExiste extends RuntimeException {
   private String mensagem;
   public UsuarioJaExiste() {
-    this.mensagem = "Usuario já existe";
+    this.mensagem = "O usuario já existe";
   }
 
   public String getMensagem() {
