@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.AulaTeste.errors.PedidoJaExiste;
+import com.example.AulaTeste.errors.PedidoSemEstoque;
 import com.example.AulaTeste.model.PedidoModel;
 import com.example.AulaTeste.service.PedidoService;
 
@@ -25,17 +25,17 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @PostMapping("/criar")
+    @PostMapping("/criar_pedido")
     public ResponseEntity<?> criarPedido(@RequestBody PedidoModel pedidoModel) {
         try {
             var pedido = pedidoService.criarPedido(pedidoModel);
             return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
-        } catch (PedidoJaExiste e) {
+        } catch (PedidoSemEstoque e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/todos_pedidos")
     public ResponseEntity<List<PedidoModel>> getAllPedidos() {
         var pedidos = pedidoService.listarPedidos();
         if (pedidos.isEmpty()) {
@@ -44,7 +44,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedidos);
     }
 
-    @GetMapping("/buscar")
+    @GetMapping("/buscar_pedido")
     public ResponseEntity<PedidoModel> getPedido(@RequestParam String codigo) {
         var pedido = pedidoService.buscarPorPedido(codigo);
         if (pedido == null) {
@@ -53,7 +53,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedido);
     }
 
-    @DeleteMapping("/deletar")
+    @DeleteMapping("/deletar_pedido")
     public ResponseEntity<Void> deletPedido(@RequestParam String codigo) {
         pedidoService.deletarPorPedido(codigo);
         return ResponseEntity.ok().build();

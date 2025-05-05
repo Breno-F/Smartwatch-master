@@ -1,9 +1,9 @@
 package com.example.AulaTeste.errors;
 
-public class PedidoJaExiste extends RuntimeException {
+public class PedidoSemEstoque extends RuntimeException {
   private String mensagem;
-  public PedidoJaExiste() {
-    this.mensagem = "Pedido já existe";
+  public PedidoSemEstoque() {
+    this.mensagem = "O pedido está esgotado ";
   }
 
   public String getMensagem() {

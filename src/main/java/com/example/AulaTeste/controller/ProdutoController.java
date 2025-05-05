@@ -25,7 +25,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @PostMapping("/criar")
+    @PostMapping("/criar_produto")
     public ResponseEntity<?> criarProduto(@RequestBody ProdutoModel produtoModel) {
         try {
             var produto = produtoService.criarProduto(produtoModel);

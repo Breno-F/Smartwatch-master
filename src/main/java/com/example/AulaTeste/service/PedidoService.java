@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.AulaTeste.errors.PedidoJaExiste;
+import com.example.AulaTeste.errors.PedidoSemEstoque;
 import com.example.AulaTeste.model.PedidoModel;
 import com.example.AulaTeste.repository.IPedidoRepository;
 
@@ -18,7 +18,7 @@ public class PedidoService {
     public PedidoModel criarPedido(PedidoModel pedidoModel) {
         var pedidoExistente = pedidoRepository.findByPedido(pedidoModel.getCodigo());
         if (pedidoExistente != null) {
-            throw new PedidoJaExiste();
+            throw new PedidoSemEstoque();
         }
 
         return pedidoRepository.save(pedidoModel);
