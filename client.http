@@ -1,0 +1,30 @@
+# Buscar usuario
+GET http://localhost:8080/usuarios/todos
+
+###
+GET http://localhost:8080/usuarios/buscar?email=joao2@email.com
+content-type: application/json 
+
+###
+DELETE http://localhost:8080/usuarios/deletar?email=joao2@email.com
+content-type: application/json 
+
+
+###
+POST http://localhost:8080/usuarios/criar
+content-type: application/json 
+
+{
+  "nome": "Joao233",
+  "email": "joao233@email.com",
+  "senha": "1234"
+}
+
+###
+POST http://localhost:8080/usuarios/login
+content-type: application/json 
+
+{
+  "email": "joao233@email.com",
+  "senha": "123433"
+}
