@@ -20,9 +20,6 @@ public class PedidoModel {
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
-
-    @Column(name = "nome_pedido")
-    private String nome;
     
     @Column(name = "codigo_pedido", unique = true)
     private String codigo;
@@ -41,8 +38,7 @@ public class PedidoModel {
 
     public PedidoModel() {}
 
-    public PedidoModel(String nome, String codigo, String valor, String enderecod, String enderecol) {
-        this.nome = nome;
+    public PedidoModel(String codigo, String valor, String enderecod, String enderecol) {
         this.codigo = codigo;
         this.valor = valor;
         this.enderecod = enderecod;
