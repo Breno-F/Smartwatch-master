@@ -25,7 +25,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/criar")
+    @PostMapping("/criar_usuario")
     public ResponseEntity<?> criarUsuario(@RequestBody UserModel userModel) {
         try {
             var user = usuarioService.criarUsuario(userModel);
@@ -35,7 +35,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/todos_usuarios")
     public ResponseEntity<List<UserModel>> getAllUsers() {
         var users = usuarioService.listarUsuarios();
         if (users.isEmpty()) {
@@ -44,7 +44,7 @@ public class UsuarioController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/buscar")
+    @GetMapping("/buscar_usuario")
     public ResponseEntity<UserModel> getUser(@RequestParam String email) {
         var user = usuarioService.buscarPorEmail(email);
         if (user == null) {
@@ -53,7 +53,7 @@ public class UsuarioController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login_usuario")
     public ResponseEntity<?> login(@RequestBody UserModel userModel) {
         boolean autenticado = usuarioService.autenticar(userModel.getEmail(), userModel.getSenha());
         if (autenticado) {
@@ -62,7 +62,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha incorreta");
     }
 
-    @DeleteMapping("/deletar")
+    @DeleteMapping("/deletar_usuario")
     public ResponseEntity<Void> deletUser(@RequestParam String email) {
         usuarioService.deletarPorEmail(email);
         return ResponseEntity.ok().build();

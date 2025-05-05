@@ -35,7 +35,7 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/todos_produtos")
     public ResponseEntity<List<ProdutoModel>> getAllProdutos() {
         var produtos = produtoService.listarProduto();
         if (produtos.isEmpty()) {
@@ -44,7 +44,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produtos);
     }
 
-    @GetMapping("/buscar")
+    @GetMapping("/buscar_produto")
     public ResponseEntity<ProdutoModel> getProduto(@RequestParam String modelo) {
         var produto = produtoService.buscarPorModelo(modelo);
         if (produto == null) {
@@ -53,7 +53,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produto);
     }
 
-    @DeleteMapping("/deletar")
+    @DeleteMapping("/deletar_produto")
     public ResponseEntity<Void> deletProduto(@RequestParam String modelo) {
         produtoService.deletarPorModelo(modelo);
         return ResponseEntity.ok().build();
