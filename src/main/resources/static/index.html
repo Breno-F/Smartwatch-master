@@ -1,105 +1,268 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Usuários - Demo</title>
-    <style>
+código login hello smart                                                                                                                                                             <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Hello Smart</title>
+  <style>
+    :root {
+      --primary-color: rgb(150, 150, 150);
+      --dark-bg: #121212;
+      --card-bg: #1e1e1e;
+      --text-light: #f5f5f7;
+      --text-muted: #86868b;
+      --input-bg: #2c2c2e;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      background-image: radial-gradient(circle at 50% 50%, #2a2a2e 0%, #121212 100%);
+    }
+
+    .login-container {
+      background-color: var(--card-bg);
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 420px;
+      animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .logo span {
+      color: var(--primary-color);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background-color: var(--input-bg);
+      color: var(--text-light);
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
+      outline: none;
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    .remember-me input {
+      accent-color: var(--primary-color);
+    }
+
+    .forgot-password {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .forgot-password:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: #0062c4;
+      transform: translateY(-1px);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 24px 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 0 10px;
+    }
+
+    .signup-text {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .signup-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .signup-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+      
       body {
-        font-family: Arial, sans-serif;
-        max-width: 600px;
-        margin: 40px auto;
+        padding: 16px;
       }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">Hello <span>Smart</span></div>
+    <h2>Faça login na sua conta</h2>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">Endereço de e-mail</label>
+        <input type="email" id="email" placeholder="seu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="••••••••" required>
+      </div>
+      <div class="remember-forgot">
+        <label class="remember-me">
+          <input type="checkbox" id="remember">
+          Lembrar-me
+        </label>
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+      </div>
+      <button type="submit" class="login-btn">Continuar</button>
+      
+      <div class="divider">ou</div>
+      
+      <button type="button" class="login-btn" style="background-color: transparent; border: 1px solid rgba(255, 255, 255, 0.1);">
+        Entrar com Google
+      </button>
+    </form>
+    <div class="signup-text">
+      Não tem uma conta? <a href="#" class="signup-link">Cadastre-se</a>
+    </div>
+  </div>
 
-      h2 {
-        margin-top: 30px;
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 5px;
+  <script>
+    const form = document.getElementById("login-form");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+      const lembrar = document.getElementById("remember").checked;
+
+      // Validação básica
+      if (!email.includes('@') || senha.length < 6) {
+        alert('Por favor, insira um e-mail válido e uma senha com pelo menos 6 caracteres');
+        return;
       }
+            
+      console.log(`Tentativa de login: \nEmail: ${email} \nSenha: ${senha} \nLembrar-me: ${lembrar}`);
 
-      input,
-      button {
-        display: block;
-        margin: 10px 0;
-        padding: 8px;
-        width: 100%;
-      }
-
-      .resposta {
-        margin-top: 10px;
-        font-weight: bold;
-      }
-
-      ul {
-        padding-left: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Sistema de Usuários</h1>
-
-    <h2>Criar usuário</h2>
-    <input type="text" id="nome" placeholder="Nome" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="senha" placeholder="Senha" />
-    <button onclick="criarUsuario()">Cadastrar</button>
-    <div class="resposta" id="respostaCadastro"></div>
-
-    <h2>Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email" />
-    <input type="password" id="loginSenha" placeholder="Senha" />
-    <button onclick="fazerLogin()">Entrar</button>
-    <div class="resposta" id="respostaLogin"></div>
-
-    <h2>Todos os usuários</h2>
-    <button onclick="listarUsuarios()">Listar usuários</button>
-    <ul id="listaUsuarios"></ul>
-
-    <script>
-      function criarUsuario() {
-        const nome = document.getElementById("nome").value;
-        const email = document.getElementById("email").value;
-        const senha = document.getElementById("senha").value;
-
-        fetch("/usuarios/criar", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nome, email, senha }),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            document.getElementById("respostaCadastro").innerText = data;
-          });
-      }
-
-      function fazerLogin() {
-        const email = document.getElementById("loginEmail").value;
-        const senha = document.getElementById("loginSenha").value;
-
-        fetch("/usuarios/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, senha }),
-        })
-          .then((res) => res.text())
-          .then((data) => {
-            document.getElementById("respostaLogin").innerText = data;
-          });
-      }
-
-      function listarUsuarios() {
-        fetch("/usuarios/todos")
-          .then((res) => res.json())
-          .then((usuarios) => {
-            const lista = document.getElementById("listaUsuarios");
-            lista.innerHTML = "";
-            usuarios.forEach((u) => {
-              const li = document.createElement("li");
-              li.textContent = `${u.nome} (${u.email})`;
-              lista.appendChild(li);
-            });
-          });
-      }
-    </script>
-  </body>
+      // Mostrar feedback visual
+      const btn = document.querySelector('.login-btn[type="submit"]');
+      btn.textContent = 'Entrando...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        btn.textContent = 'Continuar';
+        btn.disabled = false;
+        alert('Login simulado com sucesso!');
+      }, 1500);
+    });
+  </script>
+</body>
 </html>
