@@ -4,45 +4,250 @@
     <meta charset="UTF-8">
     <title>Hello Smart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Hello Smart - Smartwatches de alta qualidade">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos CSS incorporados */
+        :root {
+            --primary-color: #ff0e0e;
+            --secondary-color: #000;
+            --light-gray: #d3d3d3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100%;
+            color: #333;
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2%;
+            
+        }
+
+        header {
+            height: 200px;
+            padding: 20px 0;
+            width: 100%;
+        }
+
+        .logo {
+            width: 50%;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .menu {
+            padding-top: 30px;
+            width: 50%;
+            text-align: right;
+        }
+
+        .menu a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            position: relative;
+            padding: 50px 0;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            margin: 20px 0;
+            font-size: 1rem;
+            font-weight: 500;
+            max-width: 500px;
+        }
+
+        .cta-button {
+            border: 0;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 10px;
+            width: 150px;
+            height: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        footer {
+            background-color: #f8f8f8;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+        }
+
+        .footer-logo img {
+             max-width: 100%;
+             height: 220px;
+        }
+
+
+        .social-media {
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-media img {
+            width: 80px;
+            transition: transform 0.3s;
+        }
+
+        .social-media img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo, .menu {
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu {
+                padding-top: 20px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 0;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                max-width: 100%;
+            }
+
+            .hero-image img {
+                max-width: 80%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="center">
-            <div class="logo"><img src="assets/logo HS.JPG" width="200" height="150" /></div>
-            <div class="menu">
+        <div class="container">
+            <div class="logo">
+                <img src="Assets/logo HS.JPG" alt="Hello Smart Logo" width="170" height="120">
+            </div>
+            <nav class="menu">
                 <a href="#">Início</a>
                 <a href="#">Sobre</a>
-                <a href="#">Menu</a>
-                <a href="#">Novidades</a>
-            </div>
+                <a href="#">Produtos</a>
+                <a href="#">Contato</a>
+            </nav>
         </div>
     </header>
-    <section class="sobre">
-        <div class="extras">
-            <img src="assets/pngsmart.png" width="600" height="600" />
+    
+    <main class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>HS One <span>Smartwatch</span></h1>
+                <p>HELLO SMART - A empresa que se caracteriza como a felina, agressiva, mas elegante, não esquecendo da precisão, objetividade e rapidez. A marca imprime seu caráter singular, atendendo às expectativas daqueles que buscam algo sublime.</p>
+                <button class="cta-button">Compre agora</button>
+            </div>
+            <div class="hero-image">
+                <img src="assets/pngsmart.png" alt="Hello Smart Smartwatch">
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="Assets/3smarts.png" alt="Hello Smart">
+            </div>
             <div class="social-media">
-                <a href=""><img src="assets/instapng.png" width="300" /></a>
+                <a href="#" aria-label="Instagram">
+                    <img src="assets/instapng.png" alt="Instagram">
+                </a>
             </div>
         </div>
-        <div class="center">
-            <div class="texto-sobre">
-                <h1>HS One<br/><span style="color:rgb(255, 14, 14);">Smartwatch.</span></h1>
-                <p>HELLO SMART - A empresa que se caracteriza como a
-                    felina, agressiva, mas elegante, não esquecendo da precisão, objetividade e rapidez. A
-                    marca imprime seu caráter singular, atendendo às expectativas daqueles que buscam
-                    algo sublime.</p>
-                <button>Compre agora</button>
-            </div>
-        </div>
-        <footer>
-            <div class="footer">
-                <div class="bottom">
-                    <img src="assets/3smarts.png" width="400" height="150"/>
-                </div>
-            </div>
-        </footer>
-    </section>
+    </footer>
 </body>
 </html>
