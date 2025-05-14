@@ -1,0 +1,196 @@
+                                                                                                                                  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Smart Checkout</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --accent-color: rgb(59, 59, 59);
+            --border-color: #d2d2d7;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-weight: 600;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: #86868b;
+            font-size: 18px;
+        }
+        
+        .order-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .order-number {
+            font-weight: 500;
+            font-size: 18px;
+        }
+        
+        .order-status {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .order-detail {
+            margin-bottom: 25px;
+        }
+        
+        .detail-title {
+            color: #86868b;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        
+        .detail-content {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .order-summary {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+        
+        .summary-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .total-row {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            background: var(--accent-color);
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 17px;
+            font-weight: 500;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .continue-btn:hover {
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hello Smart Checkout</h1>
+            <div class="subtitle">Seu pedido foi registrado com sucesso</div>
+        </header>
+        
+        <div class="order-card">
+            <div class="order-header">
+                <div class="order-number">Pedido #SMART-2023-5A7B9C</div>
+                <div class="order-status">Confirmado</div>
+            </div>
+            
+            <div class="order-detail">
+                <div class="detail-title">PRODUTO</div>
+                <div class="detail-content">SmartWatch Hello Smart "One"</div>
+            </div>
+            
+            <div class="order-detail">
+                <div class="detail-title">ENDEREÇO DE ENTREGA</div>
+                <div class="detail-content">
+                    Av. Miguel Mussa Gaze, 247<br>
+                    Colégio Adélia Camargo Corrêa<br>
+                    Vila Santa Rosa<br>
+                    Guarujá - SP<br>
+                    11431-120
+                </div>
+            </div>
+            
+            <div class="order-detail">
+                <div class="detail-title">PREVISÃO DE ENTREGA</div>
+                <div class="detail-content">15 de Junho de 2025</div>
+            </div>
+        </div>
+        
+        <div class="order-summary">
+            <div class="summary-title">Resumo do Pedido</div>
+            
+            <div class="summary-row">
+                <div>SmartWatch Hello Smart "One"</div>
+                <div>R$ 199,90</div>
+            </div>
+            
+            <div class="summary-row">
+                <div>Frete</div>
+                <div>Grátis</div>
+            </div>
+            
+            <div class="summary-row">
+                <div>Impostos</div>
+                <div>R$ 100,00</div>
+            </div>
+            
+            <div class="summary-row total-row">
+                <div>Total</div>
+                <div>R$299,90 </div>
+            </div>
+            
+            <a href="home.html" class="continue-btn" style="display: inline-block; text-align: center; text-decoration: none;">Retornar para o site</a>
+        </div>
+    </div>
+</body>
+</html>
