@@ -1,6 +1,8 @@
 package com.example.AulaTeste.service;
 
+
 import jakarta.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -11,24 +13,25 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void enviarEmailBoasVindas(String para, String nome) {
+    public void enviarEmailCompra(String para, String nome) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-            helper.setFrom("projetogrupo5@escolatecnicaadeia.com.br");
+            helper.setFrom("projetogrupo3@escolatecnicaadelia.com.br");
             helper.setTo(para);
-            helper.setSubject("Bem-vindo ao nosso sistema!");
+            helper.setSubject("Sua compra foi aprovada!");
 
             String htmlContent = String.format("""
                 <html>
                     <body>
                         <h2>Olá %s,</h2>
-                        <p>Seja bem-vindo ao nosso sistema!</p>
-                        <p>Seu cadastro foi realizado com sucesso.</p>
+                        <p>Seja Bem-Vindo à nossa loja!</p>
+                        <p>Seu pedido foi efeteuado com sucesso.</p>
                         <br>
+                        <p>Seu produto está sendo separado e em breve será enviado</p>
                         <p>Atenciosamente,<br>
-                        Equipe do Sistema</p>
+                        Equipe HS One</p>
                     </body>
                 </html>
                 """, nome);
@@ -45,4 +48,6 @@ public class EmailService {
             throw new RuntimeException("Erro ao enviar email: " + e.getMessage());
         }
     }
+
+
 }

@@ -24,24 +24,28 @@ public class PedidoModel {
     @Column(name = "codigo_pedido", unique = true)
     private String codigo;
 
+    @Column(name = "nome_cliente", unique = true)
+    private String NomeCliente;
+
+    @Column(name = "email_cliente", unique = true)
+    private String EmailCliente;
+
     @Column(name = "valorcompra_user")
     private String valor;
 
     @Column(name = "enderecodestino_pedido")
     private String enderecod;
 
-    @Column(name = "enderecoloja_pedido")
-    private String enderecol;
-
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     public PedidoModel() {}
 
-    public PedidoModel(String codigo, String valor, String enderecod, String enderecol) {
+    public PedidoModel(String codigo, String valor, String enderecod, String NomeCliente, String EmailCliente) {
         this.codigo = codigo;
         this.valor = valor;
         this.enderecod = enderecod;
-        this.enderecol = enderecol;
+        this.NomeCliente = NomeCliente;
+        this.EmailCliente = EmailCliente;
     }
 }    

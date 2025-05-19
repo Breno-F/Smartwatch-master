@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.AulaTeste.errors.PedidoSemEstoque;
 import com.example.AulaTeste.model.PedidoModel;
 import com.example.AulaTeste.service.PedidoService;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,20 +40,5 @@ public class PedidoController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.ok(pedidos);
-    }
-
-    @GetMapping("/buscar_pedido")
-    public ResponseEntity<PedidoModel> getPedido(@RequestParam String codigo) {
-        var pedido = pedidoService.buscarPorPedido(codigo);
-        if (pedido == null) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-        return ResponseEntity.ok(pedido);
-    }
-
-    @DeleteMapping("/deletar_pedido")
-    public ResponseEntity<Void> deletPedido(@RequestParam String codigo) {
-        pedidoService.deletarPorPedido(codigo);
-        return ResponseEntity.ok().build();
     }
 }
