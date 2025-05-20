@@ -1,196 +1,787 @@
-                                                                                                                                  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello Smart Checkout</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --bg-color: #f5f5f7;
-            --text-color: #1d1d1f;
-            --accent-color: rgb(59, 59, 59);
-            --border-color: #d2d2d7;
+      :root {
+        --bg-color: #f5f5f7;
+        --text-color: #1d1d1f;
+        --accent-color: rgb(59, 59, 59);
+        --border-color: #d2d2d7;
+        --error-color: #e74c3c;
+        --success-color: #2ecc71;
+        --input-bg: #ffffff;
+        --shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.5;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+      }
+
+      h1 {
+        font-weight: 600;
+        font-size: 32px;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
+      .subtitle {
+        color: #86868b;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .checkout-container {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 30px;
+      }
+
+      .form-section {
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 15px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        font-size: 16px;
+        transition: var(--transition);
+        background-color: var(--input-bg);
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 2px rgba(59, 59, 59, 0.1);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .order-summary {
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        align-self: start;
+        position: sticky;
+        top: 20px;
+      }
+
+      .product-item {
+        display: flex;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .product-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 15px;
+      }
+
+      .product-details {
+        flex: 1;
+      }
+
+      .product-name {
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      .product-price {
+        font-weight: 600;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 15px;
+      }
+
+      .total-row {
+        border-top: 1px solid var(--border-color);
+        padding-top: 15px;
+        margin-top: 15px;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 16px;
+        font-size: 17px;
+        font-weight: 500;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .checkout-btn:hover {
+        background: black;
+        transform: translateY(-2px);
+      }
+
+      .checkout-btn:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.5;
+      }
+
+      .error-message {
+        color: var(--error-color);
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .success-message {
+        background-color: rgba(46, 204, 113, 0.1);
+        border: 1px solid var(--success-color);
+        color: var(--success-color);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .order-confirmation {
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        margin-top: 30px;
+        display: none;
+      }
+
+      .confirmation-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .confirmation-icon {
+        font-size: 60px;
+        color: var(--success-color);
+        margin-bottom: 20px;
+      }
+
+      .confirmation-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .confirmation-message {
+        color: #86868b;
+        font-size: 16px;
+      }
+
+      .order-details {
+        margin-top: 30px;
+        border-top: 1px solid var(--border-color);
+        padding-top: 30px;
+      }
+
+      .detail-group {
+        margin-bottom: 20px;
+      }
+
+      .detail-label {
+        font-size: 14px;
+        color: #86868b;
+        margin-bottom: 5px;
+      }
+
+      .detail-value {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .continue-shopping {
+        display: inline-block;
+        background: var(--accent-color);
+        color: white;
+        text-decoration: none;
+        padding: 14px 25px;
+        border-radius: 12px;
+        font-weight: 500;
+        margin-top: 30px;
+        transition: var(--transition);
+      }
+
+      .continue-shopping:hover {
+        background: black;
+        transform: translateY(-2px);
+      }
+
+      /* Responsividade */
+      @media (max-width: 900px) {
+        .checkout-container {
+          grid-template-columns: 1fr;
         }
-        
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        h1 {
-            font-weight: 600;
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        
-        .subtitle {
-            color: #86868b;
-            font-size: 18px;
-        }
-        
-        .order-card {
-            background: white;
-            border-radius: 18px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-        }
-        
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .order-number {
-            font-weight: 500;
-            font-size: 18px;
-        }
-        
-        .order-status {
-            color: var(--accent-color);
-            font-weight: 500;
-        }
-        
-        .order-detail {
-            margin-bottom: 25px;
-        }
-        
-        .detail-title {
-            color: #86868b;
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
-        
-        .detail-content {
-            font-size: 18px;
-            font-weight: 500;
-        }
-        
+
         .order-summary {
-            background: white;
-            border-radius: 18px;
-            padding: 30px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+          position: static;
         }
-        
-        .summary-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
         }
-        
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
+
+        h1 {
+          font-size: 28px;
         }
-        
-        .total-row {
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
-            margin-top: 15px;
-            font-weight: 600;
-            font-size: 18px;
+
+        .subtitle {
+          font-size: 16px;
         }
-        
-        .continue-btn {
-            width: 100%;
-            background: var(--accent-color);
-            color: rgb(255, 255, 255);
-            border: none;
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 17px;
-            font-weight: 500;
-            margin-top: 30px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+
+        .section-title {
+          font-size: 18px;
         }
-        
-        .continue-btn:hover {
-            background: black;
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Hello Smart Checkout</h1>
-            <div class="subtitle">Seu pedido foi registrado com sucesso</div>
-        </header>
-        
-        <div class="order-card">
-            <div class="order-header">
-                <div class="order-number">Pedido #SMART-2023-5A7B9C</div>
-                <div class="order-status">Confirmado</div>
-            </div>
-            
-            <div class="order-detail">
-                <div class="detail-title">PRODUTO</div>
-                <div class="detail-content">SmartWatch Hello Smart "One"</div>
-            </div>
-            
-            <div class="order-detail">
-                <div class="detail-title">ENDEREÇO DE ENTREGA</div>
-                <div class="detail-content">
-                    Av. Miguel Mussa Gaze, 247<br>
-                    Colégio Adélia Camargo Corrêa<br>
-                    Vila Santa Rosa<br>
-                    Guarujá - SP<br>
-                    11431-120
-                </div>
-            </div>
-            
-            <div class="order-detail">
-                <div class="detail-title">PREVISÃO DE ENTREGA</div>
-                <div class="detail-content">15 de Junho de 2025</div>
-            </div>
+      <header>
+        <div class="logo">Hello Smart</div>
+        <h1>Finalizar Compra</h1>
+        <div class="subtitle">
+          Complete suas informações abaixo para finalizar seu pedido do HS One
+          Smartwatch
         </div>
-        
-        <div class="order-summary">
-            <div class="summary-title">Resumo do Pedido</div>
-            
+      </header>
+
+      <div id="checkout-form">
+        <div class="checkout-container">
+          <div class="form-section">
+            <h2 class="section-title">Informações Pessoais</h2>
+
+            <div class="success-message" id="success-message">
+              Pedido criado com sucesso!
+            </div>
+
+            <form id="order-form">
+              <div class="form-group">
+                <label for="name" class="form-label">Nome Completo</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-input"
+                  required
+                />
+                <div class="error-message" id="name-error">
+                  Por favor, informe seu nome completo
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email" class="form-label">E-mail</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    required
+                  />
+                  <div class="error-message" id="email-error">
+                    Por favor, informe um e-mail válido
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone" class="form-label">Telefone</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="form-input"
+                    required
+                  />
+                  <div class="error-message" id="phone-error">
+                    Por favor, informe um telefone válido
+                  </div>
+                </div>
+              </div>
+
+              <h2 class="section-title">Endereço de Entrega</h2>
+
+              <div class="form-group">
+                <label for="address" class="form-label"
+                  >Endereço Completo</label
+                >
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  class="form-input"
+                  required
+                />
+                <div class="error-message" id="address-error">
+                  Por favor, informe seu endereço completo
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city" class="form-label">Cidade</label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    class="form-input"
+                    required
+                  />
+                  <div class="error-message" id="city-error">
+                    Por favor, informe sua cidade
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="state" class="form-label">Estado</label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    class="form-input"
+                    required
+                  />
+                  <div class="error-message" id="state-error">
+                    Por favor, informe seu estado
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="zipcode" class="form-label">CEP</label>
+                  <input
+                    type="text"
+                    id="zipcode"
+                    name="zipcode"
+                    class="form-input"
+                    required
+                  />
+                  <div class="error-message" id="zipcode-error">
+                    Por favor, informe um CEP válido
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="country" class="form-label">País</label>
+                  <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    class="form-input"
+                    value="Brasil"
+                    required
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="order-summary">
+            <h2 class="section-title">Resumo do Pedido</h2>
+
+            <div class="product-item">
+              <img
+                src="Assets/pngsmart.png"
+                alt="HS One Smartwatch"
+                class="product-image"
+              />
+              <div class="product-details">
+                <div class="product-name">HS One Smartwatch</div>
+                <div class="product-price">R$ 199,90</div>
+              </div>
+            </div>
+
             <div class="summary-row">
+              <div>Subtotal</div>
+              <div>R$ 199,90</div>
+            </div>
+
+            <div class="summary-row">
+              <div>Frete</div>
+              <div>Grátis</div>
+            </div>
+
+            <div class="summary-row">
+              <div>Impostos</div>
+              <div>R$ 100,00</div>
+            </div>
+
+            <div class="summary-row total-row">
+              <div>Total</div>
+              <div>R$ 299,90</div>
+            </div>
+
+            <button type="button" id="checkout-button" class="checkout-btn">
+              Finalizar Compra
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="order-confirmation" class="order-confirmation">
+        <div class="confirmation-header">
+          <div class="confirmation-icon">✓</div>
+          <h2 class="confirmation-title">Pedido Confirmado!</h2>
+          <p class="confirmation-message">
+            Seu pedido foi registrado com sucesso e está sendo processado.
+          </p>
+        </div>
+
+        <div class="order-details">
+          <div class="detail-group">
+            <div class="detail-label">NÚMERO DO PEDIDO</div>
+            <div class="detail-value" id="order-number">SMART-2023-5A7B9C</div>
+          </div>
+
+          <div class="detail-group">
+            <div class="detail-label">PRODUTO</div>
+            <div class="detail-value">SmartWatch Hello Smart "One"</div>
+          </div>
+
+          <div class="detail-group">
+            <div class="detail-label">ENDEREÇO DE ENTREGA</div>
+            <div class="detail-value" id="delivery-address">
+              Av. Miguel Mussa Gaze, 247<br />
+              Colégio Adélia Camargo Corrêa<br />
+              Vila Santa Rosa<br />
+              Guarujá - SP<br />
+              11431-120
+            </div>
+          </div>
+
+          <div class="detail-group">
+            <div class="detail-label">PREVISÃO DE ENTREGA</div>
+            <div class="detail-value" id="delivery-date">
+              15 de Junho de 2025
+            </div>
+          </div>
+
+          <div class="detail-group">
+            <div class="detail-label">RESUMO DO PEDIDO</div>
+            <div class="detail-value">
+              <div class="summary-row">
                 <div>SmartWatch Hello Smart "One"</div>
                 <div>R$ 199,90</div>
-            </div>
-            
-            <div class="summary-row">
+              </div>
+
+              <div class="summary-row">
                 <div>Frete</div>
                 <div>Grátis</div>
-            </div>
-            
-            <div class="summary-row">
+              </div>
+
+              <div class="summary-row">
                 <div>Impostos</div>
                 <div>R$ 100,00</div>
-            </div>
-            
-            <div class="summary-row total-row">
+              </div>
+
+              <div class="summary-row total-row">
                 <div>Total</div>
-                <div>R$299,90 </div>
+                <div>R$ 299,90</div>
+              </div>
             </div>
-            
-            <a href="home.html" class="continue-btn" style="display: inline-block; text-align: center; text-decoration: none;">Retornar para o site</a>
+          </div>
         </div>
+
+        <a href="index.html" class="continue-shopping">Retornar para o site</a>
+      </div>
     </div>
-</body>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const checkoutButton = document.getElementById("checkout-button");
+        const orderForm = document.getElementById("order-form");
+        const checkoutForm = document.getElementById("checkout-form");
+        const orderConfirmation = document.getElementById("order-confirmation");
+        const successMessage = document.getElementById("success-message");
+        const orderNumber = document.getElementById("order-number");
+        const deliveryAddress = document.getElementById("delivery-address");
+        const deliveryDate = document.getElementById("delivery-date");
+
+        // Gerar código de pedido aleatório
+        function generateOrderCode() {
+          const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          let code = "SMART-";
+          for (let i = 0; i < 8; i++) {
+            code += chars.charAt(Math.floor(Math.random() * chars.length));
+          }
+          return code;
+        }
+
+        // Calcular data de entrega (10 dias a partir de hoje)
+        function calculateDeliveryDate() {
+          const date = new Date();
+          date.setDate(date.getDate() + 10);
+
+          const options = { day: "numeric", month: "long", year: "numeric" };
+          return date.toLocaleDateString("pt-BR", options);
+        }
+
+        // Validar formulário
+        function validateForm() {
+          let isValid = true;
+
+          // Validar nome
+          const name = document.getElementById("name");
+          if (!name.value.trim()) {
+            document.getElementById("name-error").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("name-error").style.display = "none";
+          }
+
+          // Validar email
+          const email = document.getElementById("email");
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email.value)) {
+            document.getElementById("email-error").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("email-error").style.display = "none";
+          }
+
+          // Validar telefone
+          const phone = document.getElementById("phone");
+          if (!phone.value.trim() || phone.value.length < 10) {
+            document.getElementById("phone-error").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("phone-error").style.display = "none";
+          }
+
+          // Validar endereço
+          const address = document.getElementById("address");
+          if (!address.value.trim()) {
+            document.getElementById("address-error").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("address-error").style.display = "none";
+          }
+
+          // Validar cidade
+          const city = document.getElementById("city");
+          if (!city.value.trim()) {
+            document.getElementById("city-error").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("city-error").style.display = "none";
+          }
+
+          // Validar estado
+          const state = document.getElementById("state");
+          if (!state.value.trim()) {
+            document.getElementById("state-error").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("state-error").style.display = "none";
+          }
+
+          // Validar CEP
+          const zipcode = document.getElementById("zipcode");
+          if (!zipcode.value.trim() || zipcode.value.length < 8) {
+            document.getElementById("zipcode-error").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("zipcode-error").style.display = "none";
+          }
+
+          return isValid;
+        }
+        async function submitOrder() {
+          if (!validateForm()) {
+            return;
+          }
+
+          // Mostrar spinner no botão
+          checkoutButton.innerHTML =
+            '<span class="spinner"></span> Processando...';
+          checkoutButton.disabled = true;
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const address = document.getElementById("address").value;
+          const city = document.getElementById("city").value;
+          const state = document.getElementById("state").value;
+          const zipcode = document.getElementById("zipcode").value;
+
+          // Formatar endereço completo
+          const fullAddress = `${address}, ${city} - ${state}, ${zipcode}`;
+
+          // Gerar código de pedido
+          const orderCode = generateOrderCode();
+
+          // Criar objeto de pedido conforme o modelo da API
+          // Observe que os nomes dos campos devem corresponder exatamente aos nomes no modelo Java
+          const orderData = {
+            codigo: orderCode,
+            nomeCliente: name, // Alterado de NomeCliente para nomeCliente (camelCase)
+            emailCliente: email, // Alterado de EmailCliente para emailCliente (camelCase)
+            valor: "R$ 299,90",
+            enderecod: fullAddress,
+          };
+
+          console.log("Enviando dados:", JSON.stringify(orderData)); // Para debug
+
+          try {
+            const response = await fetch("/pedidos/criar_pedido", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(orderData),
+            });
+
+            if (!response.ok) {
+              throw new Error(`Erro ao criar pedido: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Resposta do servidor:", data); // Para debug
+
+            orderNumber.textContent = orderCode;
+            deliveryAddress.innerHTML = fullAddress.replace(/,/g, "<br>");
+            deliveryDate.textContent = calculateDeliveryDate();
+
+            successMessage.style.display = "block";
+
+            setTimeout(() => {
+              checkoutForm.style.display = "none";
+              orderConfirmation.style.display = "block";
+
+              // Rolar para o topo
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }, 1500);
+          } catch (error) {
+            console.error("Erro:", error);
+            alert(
+              "Ocorreu um erro ao processar seu pedido. Por favor, tente novamente."
+            );
+
+            // Restaurar botão
+            checkoutButton.innerHTML = "Finalizar Compra";
+            checkoutButton.disabled = false;
+          }
+        }
+
+        // Event listener para o botão de checkout
+        checkoutButton.addEventListener("click", submitOrder);
+
+        // Adicionar validação em tempo real nos campos
+        const formInputs = document.querySelectorAll(".form-input");
+        formInputs.forEach((input) => {
+          input.addEventListener("input", function () {
+            if (this.value.trim()) {
+              const errorId = this.id + "-error";
+              const errorElement = document.getElementById(errorId);
+              if (errorElement) {
+                errorElement.style.display = "none";
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
