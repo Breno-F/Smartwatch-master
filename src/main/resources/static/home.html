@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello Smart</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Hello Smart - Smartwatches de alta qualidade">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos CSS incorporados */
         :root {
             --primary-color: black;
             --secondary-color: rgb(59, 59, 59);
@@ -22,47 +21,47 @@
         }
 
         body {
-            height: 100%;
-            color: #000000;
             background-color: #fff;
+            color: var(--primary-color);
             line-height: 1.6;
         }
 
         .container {
-            display: flex;
-            flex-wrap: wrap;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 2%;
+            padding: 0 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
         }
 
         header {
-            height: 200px;
-            padding: 20px 0;
             width: 100%;
-        }
-
-        .logo {
-            width: 50%;
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
         .logo img {
+            width: 180px;
             max-width: 100%;
             height: auto;
         }
 
         .menu {
-            padding-top: 30px;
-            width: 50%;
-            text-align: right;
+            display: flex;
+            gap: 15px;
         }
 
         .menu a {
             color: var(--secondary-color);
             text-decoration: none;
             font-weight: bold;
-            margin-right: 15px;
             transition: color 0.3s;
+            font-size: 1rem;
         }
 
         .menu a:hover {
@@ -70,20 +69,20 @@
         }
 
         .hero {
-            position: relative;
-            padding: 50px 0;
-            min-height: calc(100vh - 200px);
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            padding: 50px 0;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .hero-content {
-            flex: 1;
-            padding-right: 50px;
+            flex: 1 1 400px;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.2;
@@ -96,37 +95,28 @@
         .hero-content p {
             margin: 20px 0;
             font-size: 1rem;
-            font-weight: 500;
             max-width: 500px;
         }
 
-.cta-button {
-    display: inline-block;
-    text-decoration: none; /* Remove sublinhado */
-    text-align: center;
-    border: 0;
-    background-color: var(--secondary-color);
-    color: white;
-    border-radius: 10px;
-    width: 150px;
-    height: 50px;
-    line-height: 50px; /* Centraliza o texto verticalmente */
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 10px;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
 
-.cta-button:hover {
-    background-color: var(--primary-color);
-    transform: translateY(-3px);
-}
-
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
 
         .hero-image {
-            flex: 1;
+            flex: 1 1 300px;
             text-align: center;
-            position: relative;
         }
 
         .hero-image img {
@@ -136,9 +126,9 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
+            0% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            100% { transform: translateY(0); }
         }
 
         footer {
@@ -147,25 +137,18 @@
             text-align: center;
         }
 
-        .footer-logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .footer-logo img {
+            width: 350px;
+            max-width: 80%;
+            height: auto;
         }
-
-
 
         .social-media {
             margin-top: 20px;
         }
 
-        .social-media a {
-            display: inline-block;
-            margin: 0 10px;
-        }
-
         .social-media img {
-            width: 30px;
+            width: 100px;
             transition: transform 0.3s;
         }
 
@@ -175,13 +158,16 @@
 
         /* Responsividade */
         @media (max-width: 768px) {
-            .logo, .menu {
-                width: 100%;
-                text-align: center;
+            header {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
             }
 
             .menu {
-                padding-top: 20px;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
             }
 
             .hero {
@@ -190,62 +176,61 @@
                 padding: 30px 0;
             }
 
-            .hero-content {
-                padding-right: 0;
-                margin-bottom: 30px;
-            }
-
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .hero-content p {
+                font-size: 0.95rem;
                 max-width: 100%;
             }
 
-            .hero-image img {
-                max-width: 80%;
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .footer-logo img {
+                width: 200px;
+            }
+
+            .social-media img {
+                width: 25px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="Assets/logo-HS-2.jfif" alt="Hello Smart Logo" style="width: 220px;">
-            </div>
-            <nav class="menu">
-                <a href="#">Sobre</a>               
-                <a href="https://www.instagram.com/hello__smart/">Contato</a>
-                <a href="login.html">Sair</a>
-            </nav>
+    <header class="container">
+        <div class="logo">
+            <img src="Assets/logo-HS-2.jfif" alt="Hello Smart Logo">
         </div>
+        <nav class="menu">
+            <a href="#">Sobre</a>
+            <a href="https://www.instagram.com/hello__smart/">Contato</a>
+            <a href="login.html">Sair</a>
+        </nav>
     </header>
-    
-    <main class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>HS One <span>Smartwatch.</span></h1>
-                <p>HELLO SMART - A empresa que se caracteriza como a felina, agressiva, mas elegante, não esquecendo da precisão, objetividade e rapidez. A marca imprime seu caráter singular, atendendo às expectativas daqueles que buscam algo sublime.</p>
-                <a href="produto.html" class="cta-button">Compre agora</a>
-            </div>
-            <div class="hero-image">
-                <img src="Assets/pngsmart.png" alt="Hello Smart Smartwatch">
-            </div>
+
+    <main class="hero container">
+        <div class="hero-content">
+            <h1>HS One <span>Smartwatch.</span></h1>
+            <p>HELLO SMART - A empresa que se caracteriza como a felina, agressiva, mas elegante, não esquecendo da precisão, objetividade e rapidez. A marca imprime seu caráter singular, atendendo às expectativas daqueles que buscam algo sublime.</p>
+            <a href="produto.html" class="cta-button">Compre agora</a>
+        </div>
+        <div class="hero-image">
+            <img src="Assets/pngsmart.png" alt="Hello Smart Smartwatch">
         </div>
     </main>
-    
+
     <footer>
-        <div class="footer">
-            <div class="footer-logo">
-                <img src="Assets/3smarts.png" alt="Hello Smart" style="width: 470px;">
-            </div>
-            <div class="social-media">
-                <a href="https://www.instagram.com/hello__smart/" aria-label="Instagram">
-                    <img src="Assets/instapng.png" alt="Instagram" style="width: 140px;">
-                </a>
-            </div>
+        <div class="footer-logo">
+            <img src="Assets/3smarts.png" alt="Hello Smart">
+        </div>
+        <div class="social-media">
+            <a href="https://www.instagram.com/hello__smart/" aria-label="Instagram">
+                <img src="Assets/instapng.png" alt="Instagram">
+            </a>
         </div>
     </footer>
 </body>

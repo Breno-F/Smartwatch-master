@@ -360,11 +360,74 @@
         font-size: 48px;
         margin-bottom: 25px;
         color: var(--accent-color);
-        background: linear-gradient(135deg, var(--accent-color), #00a2ff);
+        background: linear-gradient(135deg, var(--accent-color), #e80b0b);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         display: inline-block;
+      }
+
+      /* Regra específica: só para .feature com classe 'destaque' */
+      .feature.coração .feature-icon-coraçao {
+         background: linear-gradient(135deg, #ff0000, #aa3e3e);
+         display: inline-block;
+         background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 48px;
+        margin-bottom: 25px;
+      }
+
+      .feature.folha .feature-icon-folha {
+        background: linear-gradient(135deg, #7af284, #40b523);
+         display: inline-block;
+         background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 48px;
+        margin-bottom: 25px;
+        
+      }
+
+      .feature.agua .feature-icon-agua {
+        background: linear-gradient(135deg, #2bacba, #61faff);
+         display: inline-block;
+         background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 48px;
+        margin-bottom: 25px;
+
+      }
+
+      .feature.raio .feature-icon-raio {
+       background: linear-gradient(135deg, #cede52, #e8ff63);
+         display: inline-block;
+         background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 48px;
+        margin-bottom: 25px;  
+      }
+
+      .feature.alvo .feature-icon-alvo {
+      background: linear-gradient(135deg, #f10f0f, #d08b8b);
+         display: inline-block;
+         background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 48px;
+        margin-bottom: 25px;    
+      }
+
+      .feature.bateria .feature-icon-bateria {
+      background: linear-gradient(135deg, #a4a4a4, #555555);
+         display: inline-block;
+         background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 48px;
+        margin-bottom: 25px;  
       }
 
       .feature-title {
@@ -648,7 +711,7 @@
     <main>
       <section class="hero">
         <div class="hero-content">
-          <h1 class="product-name">HS One</h1>
+          <h1 class="product-name">HS One.</h1>
           <p class="product-tagline">
             Desempenho extraordinário. Design elegante.
           </p>
@@ -676,8 +739,8 @@
         </p>
 
         <div class="feature-grid">
-          <div class="feature">
-            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <div class="feature raio">
+            <div class="feature-icon-raio"><i class="fas fa-bolt"></i></div>
             <h3 class="feature-title">Alto Desempenho</h3>
             <p class="feature-desc">
               Tecnologia avançada para máxima eficiência em todas as tarefas.
@@ -685,8 +748,8 @@
             </p>
           </div>
 
-          <div class="feature">
-            <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+          <div class="feature alvo">
+            <div class="feature-icon-alvo"><i class="fas fa-bullseye"></i></div>
             <h3 class="feature-title">Precisão Absoluta</h3>
             <p class="feature-desc">
               Resultados exatos e consistentes quando você mais precisa.
@@ -694,8 +757,8 @@
             </p>
           </div>
 
-          <div class="feature">
-            <div class="feature-icon"><i class="fas fa-feather-alt"></i></div>
+          <div class="feature folha">
+            <div class="feature-icon-folha"><i class="fas fa-feather-alt"></i></div>
             <h3 class="feature-title">Design Minimalista</h3>
             <p class="feature-desc">
               Estilo elegante que se adapta a qualquer ambiente. Construído com
@@ -703,8 +766,8 @@
             </p>
           </div>
 
-          <div class="feature">
-            <div class="feature-icon"><i class="fas fa-heart"></i></div>
+          <div class="feature coração">
+            <div class="feature-icon-coraçao"><i class="fas fa-heart"></i></div>
             <h3 class="feature-title">Monitoramento de Saúde</h3>
             <p class="feature-desc">
               Acompanhe seus batimentos cardíacos, níveis de oxigênio no sangue
@@ -712,8 +775,8 @@
             </p>
           </div>
 
-          <div class="feature">
-            <div class="feature-icon"><i class="fas fa-battery-full"></i></div>
+          <div class="feature bateria">
+            <div class="feature-icon-bateria"><i class="fas fa-battery-full"></i></div>
             <h3 class="feature-title">Bateria de Longa Duração</h3>
             <p class="feature-desc">
               Até 7 dias de uso com uma única carga. Tecnologia de carregamento
@@ -721,8 +784,8 @@
             </p>
           </div>
 
-          <div class="feature">
-            <div class="feature-icon"><i class="fas fa-tint"></i></div>
+          <div class="feature agua">
+            <div class="feature-icon-agua"><i class="fas fa-tint"></i></div>
             <h3 class="feature-title">Resistente à Água</h3>
             <p class="feature-desc">
               Use durante exercícios intensos ou na piscina sem preocupações.
