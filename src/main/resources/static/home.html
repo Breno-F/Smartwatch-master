@@ -156,6 +156,79 @@
             transform: scale(1.2);
         }
 
+        .sobre-box {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    width: 420px;
+    max-height: 220px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    color: var(--secondary-color);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.sobre-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.sobre-header h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.sobre-header button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+.sobre-content {
+    max-height: 180px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .sobre-box {
+        width: 95%;
+        left: 2.5%;
+        bottom: 10px;
+        max-height: 220px;
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+
+    .sobre-content {
+        max-height: 180px;
+    }
+
+    .sobre-header h3 {
+        font-size: 0.9rem;
+    }
+
+    .sobre-header button {
+        font-size: 1.1rem;
+    }
+}
+
+
+
+
+        
+
         /* Responsividade */
         @media (max-width: 768px) {
             header {
@@ -206,7 +279,7 @@
             <img src="Assets/logo-HS-2.jfif" alt="Hello Smart Logo">
         </div>
         <nav class="menu">
-            <a href="#">Sobre</a>
+            <a href="#" id="sobreLink">Sobre</a>
             <a href="https://www.instagram.com/hello__smart/">Contato</a>
             <a href="login.html">Sair</a>
         </nav>
@@ -225,7 +298,7 @@
 
     <footer>
         <div class="footer-logo">
-            <img src="Assets/3smarts.png" alt="Hello Smart">
+            <img src="Assets/smartwatchpng.png" alt="Hello Smart">
         </div>
         <div class="social-media">
             <a href="https://www.instagram.com/hello__smart/" aria-label="Instagram">
@@ -233,5 +306,51 @@
             </a>
         </div>
     </footer>
+    <div class="sobre-box" id="sobreBox">
+    <div class="sobre-header">
+        <h3>Sobre</h3>
+        <button id="toggleButton" aria-label="Minimizar" title="Minimizar">−</button>
+    </div>
+    <div class="sobre-content" id="sobreContent">
+        <p>
+            Em julho de 2023, enquanto fazia pesquisas de aparelhos que marcassem o seu desempenho físico enquanto dançava, Isadora sentiu o coração bater mais forte. Ali nasceu um sonho: criar um relógio que não marcasse apenas horas, mas registrasse cada passo, cada batida e cada conquista. Foi nesse instante de pura inspiração que ela reuniu ao seu redor pessoas que também carregavam um desejo ardente de fazer a diferença.
+            <br><br>
+            Maria Eduarda, com seu olhar paciente e preciso do financeiro, segurou firme as rédeas do orçamento e fez caber cada investimento na coragem de inovar. Marcos e Isabelly, responsáveis pela logística, sonharam alto para que cada caixa chegasse rápido às mãos de quem confia seu ritmo à Hello Smart. Sophia, do marketing, traduziu essa emoção em campanhas que pulsavam nas redes — do #HELLOGroove para quem dança com a alma, ao #HELLOSprint para quem corre em busca de si mesmo.
+            <br><br>
+            No estúdio de criação, as noites de protótipo viraram celebração de amizade: a tela que acendia a cada batida de música, os modos de treino que acompanhavam a superação diária, as skins que refletiam a cultura pop que une gerações. Yasmin e Beatriz, do RH, acolheram cada talento com cuidado, garantindo que a empatia e a alegria estivessem tão presentes quanto o próprio design do relógio.
+            <br><br>
+            Quando, em abril de 2024, a campanha de crowdfunding atingiu valores altos em apenas quatro dias, não foi só o caixa que brilhou: foram os olhos de todos, cheios de esperança. E aquela comemoração coletiva, com lives de dança, desafios de corrida e histórias do esporte compartilhadas, transformou a HELLO Smart em mais do que uma empresa — virou uma família.
+            <br><br>
+            Hoje, cada desafio — seja um #HELLOGrooveChallenge ou um desafio  pelo #HELLOSprint — é um lembrete de que carregamos juntos sonhos e metas. Em cada pulso, bate a força de um time que acredita na tecnologia que aproxima, no esporte que inspira e na conexão humana que faz cada segundo valer a pena.
+            <br><br>
+            E o futuro? Está prestes a ganhar cor e movimento com a nova novidade da Hello Smart, onde pistas de dança virtuais e rotas de corrida surgirão diante de você. Ainda assim, o que mais importa continua o mesmo: sentir o tempo pulsar, com quem sonhou desde o primeiro minuto ao seu lado. Então, venha conhecer a inauguração da nossa loja física. No dia 27/05
+            <br><br>
+            <strong>HELLO Smart — Tempo com sentimento, ritmo com alma.</strong>
+        </p>
+    </div>
+</div>
+<script>
+    const toggleBtn = document.getElementById('toggleButton');
+    const sobreContent = document.getElementById('sobreContent');
+    const sobreBox = document.getElementById('sobreBox');
+    const sobreLink = document.getElementById('sobreLink');
+
+    // Minimizar/Expandir botão na caixa
+    toggleBtn.addEventListener('click', () => {
+        const isVisible = sobreContent.style.display !== 'none';
+        sobreContent.style.display = isVisible ? 'none' : 'block';
+        toggleBtn.textContent = isVisible ? '+' : '−';
+        toggleBtn.title = isVisible ? 'Expandir' : 'Minimizar';
+    });
+
+    // Clique no link "Sobre" do menu
+    sobreLink.addEventListener('click', (e) => {
+        e.preventDefault(); // Impede navegação para #
+        sobreContent.style.display = 'block';
+        toggleBtn.textContent = '−';
+        toggleBtn.title = 'Minimizar';
+    });
+</script>
+
 </body>
 </html>
